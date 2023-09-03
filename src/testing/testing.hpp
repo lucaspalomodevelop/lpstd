@@ -12,6 +12,27 @@ namespace lpstd
     namespace testing
     {
 
+        struct Results
+        {
+            int passed = 0;
+            int failed = 0;
+        };
+
+        Results Results;
+
+        void drawResults()
+        {
+            std::cout << std::endl;
+            if (Results.failed == 0)
+            {
+                std::cout << "=== ✅ All tests passed ===" << std::endl;
+            }
+            else
+            {
+                std::cout << "=== ❌ " << Results.failed << " tests failed ===" << std::endl;
+            }
+        }
+
         template <typename T>
         class Expect
         {
@@ -36,10 +57,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be " << expected << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << expected << " but got " << this->value << std::endl;
+                    Results.failed++;
                 }
                 return result;
             }
@@ -50,10 +73,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be greater than " << expected << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be greater than " << expected << std::endl;
+                    Results.failed++;
                 }
 
                 return result;
@@ -65,10 +90,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be less than " << expected << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be less than " << expected << std::endl;
+                    Results.failed++;
                 }
                 return result;
             }
@@ -79,10 +106,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be true" << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be true" << std::endl;
+                    Results.failed++;
                 }
                 return result;
             }
@@ -93,10 +122,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be false" << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be false" << std::endl;
+                    Results.failed++;
                 }
                 return result;
             }
@@ -107,10 +138,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be close to " << expected << std::endl;
+                    Results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be close to " << expected << std::endl;
+                    Results.failed++;
                 }
                 return result;
             }
