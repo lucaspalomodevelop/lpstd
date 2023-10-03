@@ -178,5 +178,21 @@ namespace lpstd
             testSuite();
         }
 
+        void testThrow(std::function<void()> testCase)
+        {
+            try
+            {
+                testCase();
+            }
+            catch (std::exception &e)
+            {
+                std::cout << "✅ Expected exception thrown: " << e.what() << std::endl;
+                Results.passed++;
+                return;
+            }
+            std::cout << "❌ Expected exception not thrown" << std::endl;
+            Results.failed++;
+        }
+
     }
 }
