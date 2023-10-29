@@ -88,6 +88,11 @@ namespace lpstd
                 return values.size() > 0 ? values[0] : "";
             }
 
+            std::list<commandInfo> getCommands()
+            {
+                return this->commands;
+            }
+
             void addCommand(std::string name, std::string description, void (*func)(void))
             {
                 commandInfo command;

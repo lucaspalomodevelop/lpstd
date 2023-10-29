@@ -167,6 +167,7 @@ namespace lpstd
         {
             std::cout << description << std::endl;
             testCase();
+            std::cout << std::endl;
         }
 
         // Custom describe function to group related test cases
@@ -174,6 +175,8 @@ namespace lpstd
         {
             std::cout << "Describing " << description << std::endl;
             testSuite();
+            drawResults();
+            std::cout << std::endl;                
         }
 
         void testThrow(std::function<void()> testCase)
