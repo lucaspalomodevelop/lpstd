@@ -3,8 +3,9 @@
 #include <functional>
 
 #ifdef _WIN32
-#include <cstdio>
-#include <windows.h>
+#define needUTF8() (SetConsoleOutputCP(65001) && setvbuf(stdout, nullptr, _IOFBF, 1000))
+#else
+#define needUTF8()
 #endif
 
 namespace lpstd
@@ -22,6 +23,9 @@ namespace lpstd
 
         void drawResults()
         {
+
+            needUTF8();
+
             std::cout << std::endl;
             if (Results.failed == 0)
             {
@@ -40,13 +44,7 @@ namespace lpstd
             Expect(T value)
             {
 
-#ifdef _WIN32
-                // Set console code page to UTF-8 so console known how to interpret string data
-                SetConsoleOutputCP(CP_UTF8);
-
-                // Enable buffering to prevent VS from chopping up UTF-8 byte sequences
-                setvbuf(stdout, nullptr, _IOFBF, 1000);
-#endif
+                needUTF8();
 
                 this->value = value;
             }
@@ -176,6 +174,22 @@ namespace lpstd
         {
             std::cout << "Describing " << description << std::endl;
             testSuite();
+        }
+
+        void testThrow(std::function<void()> testCase)
+        {
+            try
+            {
+                testCase();
+            }
+            catch (std::exception &e)
+            {
+                std::cout << "✅ Expected exception thrown: " << e.what() << std::endl;
+                Results.passed++;
+                return;
+            }
+            std::cout << "❌ Expected exception not thrown" << std::endl;
+            Results.failed++;
         }
 
     }

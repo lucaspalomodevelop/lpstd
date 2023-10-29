@@ -1,4 +1,6 @@
 
+#ifndef __LPSTD_SINGLETON_HPP__
+#define __LPSTD_SINGLETON_HPP__
 namespace lpstd
 {
     template <typename T>
@@ -20,3 +22,5 @@ namespace lpstd
         Singleton &operator=(Singleton const &);
     };
 }
+
+#endif // __LPSTD_SINGLETON_HPP__
