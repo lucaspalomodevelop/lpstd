@@ -32,7 +32,8 @@ namespace lpstd
 
             commandInfo currentCommand = {name : "",
                                           description : "",
-                                          func : nullptr};
+                                          func : nullptr,
+                                          args : {}};
 
         public:
             Command(/* args */)

@@ -13,13 +13,13 @@ namespace lpstd
     namespace testing
     {
 
-        struct Results
+        struct Testingresults
         {
             int passed = 0;
             int failed = 0;
         };
 
-        Results Results;
+        Testingresults results;
 
         void drawResults()
         {
@@ -27,13 +27,13 @@ namespace lpstd
             needUTF8();
 
             std::cout << std::endl;
-            if (Results.failed == 0)
+            if (results.failed == 0)
             {
                 std::cout << "=== ✅ All tests passed ===" << std::endl;
             }
             else
             {
-                std::cout << "=== ❌ " << Results.failed << " tests failed ===" << std::endl;
+                std::cout << "=== ❌ " << results.failed << " tests failed ===" << std::endl;
             }
         }
 
@@ -55,12 +55,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be " << expected << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << expected << " but got " << this->value << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
                 return result;
             }
@@ -71,12 +71,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be greater than " << expected << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be greater than " << expected << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
 
                 return result;
@@ -88,12 +88,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be less than " << expected << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be less than " << expected << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
                 return result;
             }
@@ -104,12 +104,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be true" << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be true" << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
                 return result;
             }
@@ -120,12 +120,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be false" << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be false" << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
                 return result;
             }
@@ -136,12 +136,12 @@ namespace lpstd
                 if (result)
                 {
                     std::cout << "✅ Expected " << this->value << " to be close to " << expected << std::endl;
-                    Results.passed++;
+                    results.passed++;
                 }
                 else
                 {
                     std::cout << "❌ Expected " << this->value << " to be close to " << expected << std::endl;
-                    Results.failed++;
+                    results.failed++;
                 }
                 return result;
             }
@@ -185,11 +185,11 @@ namespace lpstd
             catch (std::exception &e)
             {
                 std::cout << "✅ Expected exception thrown: " << e.what() << std::endl;
-                Results.passed++;
+                results.passed++;
                 return;
             }
             std::cout << "❌ Expected exception not thrown" << std::endl;
-            Results.failed++;
+            results.failed++;
         }
 
     }
