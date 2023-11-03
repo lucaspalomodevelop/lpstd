@@ -20,6 +20,7 @@ namespace lpstd
             std::string name;
             std::string description;
             void (*func)();
+            std::vector<std::string> aliases;
             std::vector<std::string> args;
         };
 
@@ -101,6 +102,18 @@ namespace lpstd
                 command.func = func;
                 this->commands.push_back(command);
             }
+            void addCommandAlias(std::string name, std::string alias)
+            {
+                for (auto &commandInfo : this->commands)
+                {
+                    if (commandInfo.name == name)
+                    {
+                        commandInfo.aliases.push_back(alias);
+                        return;
+                    }
+                }
+                std::cout << "Command not found" << std::endl;
+            }
 
             // void addCommand(std::string name, std::string description, void (*func)(int argc, char *argv[]))
             // {
@@ -121,7 +134,26 @@ namespace lpstd
 
                 for (auto &commandInfo : sortedCommands)
                 {
-                    help += commandInfo.name + " - " + commandInfo.description + "\n";
+                    if (commandInfo.aliases.size() == 0)
+                    {
+                        help += commandInfo.name + " - " + commandInfo.description + "\n";
+                        continue;
+                    }
+                    std::string aliases = "";
+
+                    for (auto &alias : commandInfo.aliases)
+                    {
+                        if (aliases != "")
+                        {
+                            aliases += ", " + alias;
+                        }
+                        else
+                        {
+                            aliases += alias;
+                        }
+                    }
+
+                    help += commandInfo.name + " - " + commandInfo.description + " [ " + aliases + " ]\n";
                 }
 
                 return help;
@@ -177,6 +209,17 @@ namespace lpstd
                         currentCommand = commandInfo;
                         commandInfo.func();
                         return;
+                    }
+
+                    for (auto &alias : commandInfo.aliases)
+                    {
+                        if (alias == command)
+                        {
+                            commandInfo.args = args;
+                            currentCommand = commandInfo;
+                            commandInfo.func();
+                            return;
+                        }
                     }
                 }
                 std::cout << "Command not found" << std::endl;
