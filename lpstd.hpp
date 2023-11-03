@@ -7,6 +7,8 @@
 #include <windows.h>
 #endif
 
+#include "src/logging/logger.hpp"
+
 #include "src/patterns/singleton.hpp"
 #include "src/testing/testing.hpp"
 // #include "src/faker/faker.hpp"
