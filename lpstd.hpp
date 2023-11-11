@@ -14,5 +14,6 @@
 // #include "src/faker/faker.hpp"
 #include "src/exceptions/exceptions.hpp"
 #include "src/classes/command.hpp"
+#include "src/classes/webserver.hpp"
 
 #endif // __LPSTD_HPP__
